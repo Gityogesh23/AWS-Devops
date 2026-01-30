@@ -1,6 +1,16 @@
 # AWS-Devops
 
-<img width="800" height="700" alt="image" src="https://github.com/user-attachments/assets/eef7b0a0-45be-4d7c-9b66-43ee65815098" />
-
-
 Let's Learn And Explore The Best AWS-DevOps Practices.
+
+Here are the top 10 engineering blogs(Across Different Domains)that I Recommend To Grow:
+  
+1)/dynamic-kubernetes-cluster-scaling-at-airbnb  
+2)https://netflixtechblog.com/empowerin...
+3)https://openai.com/index/scaling-post...
+4)https://github.blog/engineering/
+5)https://blog.cloudflare.com/tag/engin...
+6)https://www.uber.com/en-IN/blog/engin...
+7)https://stripe.com/blog/engineering
+8)https://cloud.google.com/blog/
+9)https://www.anthropic.com/engineering
+10)https://aws.amazon.com/blogs/architec...
