@@ -3,8 +3,7 @@
 Let's Learn And Explore The Best AWS-DevOps Practices.
 
 Here are the top 10 engineering blogs(Across Different Domains)that I Recommend To Grow:
-  
-1)/dynamic-kubernetes-cluster-scaling-at-airbnb  
+1)https://dynamic-kubernetes-cluster-scaling-at-airbnb  
 2)https://netflixtechblog.com/empowerin...
 3)https://openai.com/index/scaling-post...
 4)https://github.blog/engineering/
