@@ -1,0 +1,83 @@
+# cron command in Linux with Examples:
+
+The cron is a software utility, offered by a Linux-like operating system that automates 
+the scheduled task at a predetermined time. It is a daemon process, which runs as a 
+background process and performs the specified operations at the predefined time when a 
+certain event or condition is triggered without the intervention of a user. Dealing with 
+a repeated task frequently is an intimidating task for the system administrator and thus 
+he can schedule such processes to run automatically in the background at regular intervals 
+of time by creating a list of those commands using cron. It enables the users to execute 
+the scheduled task on a regular basis unobtrusively like doing the backup every day at 
+midnight, scheduling updates on a weekly basis, synchronizing the files at some regular 
+interval. Cron checks for the scheduled job recurrently and when the scheduled time fields 
+match the current time fields, the scheduled commands are executed. It is started 
+automatically from /etc/init.d on entering multi-user run levels. 
+Syntax: 
+
+cron [-f] [-l] [-L loglevel]
+Options: 
+ 
+
+-f : Used to stay in foreground mode, and don't daemonize.
+-l : This will enable the LSB compliant names for /etc/cron.d files.
+-n : Used to add the FQDN in the subject when sending mails.
+-L loglevel : This option will tell the cron what to log about the jobs with the following 
+values: 
+
+1 : It will log the start of all cron jobs.
+2 : It will log the end of all cron jobs.
+4 : It will log all the failed jobs. Here the exit status will not equal to zero.
+8 : It will log the process number of all the cron jobs.
+The crontab (abbreviation for "cron table") is list of commands to execute the scheduled 
+tasks at specific time. It allows the user to add, remove or modify the scheduled tasks. 
+The crontab command syntax has six fields separated by space where the first five 
+represent the time to run the task and the last one is for the command. 
+
+Minute (holds a value between 0-59)
+Hour (holds value between 0-23)
+Day of Month (holds value between 1-31)
+Month of the year (holds a value between 1-12 or Jan-Dec, the first three letters of the 
+month's name shall be used)
+Day of the week (holds a value between 0-6 or Sun-Sat, here also first three letters of 
+the day shall be used)
+Command
+The rules which govern the format of date and time field as follows: 
+
+When any of the first five fields are set to an asterisk(*), it stands for all the values 
+of the field. For instance, to execute a command daily, we can put an asterisk(*) in the 
+week's field.
+One can also use a range of numbers, separated with a hyphen(-) in the time and date field 
+to include more than one contiguous value but not all the values of the field. For example, 
+we can use the 7-10 to run a command from July to October.
+The comma (, ) operator is used to include a list of numbers which may or may not be 
+consecutive. For example, "1, 3, 5" in the weeks' field signifies execution of a command 
+every Monday, Wednesday, and Friday.
+A slash character(/) is included to skip given number of values. For instance, "*/4" in 
+the hour's field specifies 'every 4 hours' which is equivalent to 0, 4, 8, 12, 16, 20.
+Permitting users to run cron jobs: 
+
+The user must be listed in this file to be able to run cron jobs if the file exists.
+/etc/cron.allow
+If the cron.allow file doesn't exist but the cron.deny file exists, then a user must 
+not be listed in this file to be able to run the cron job.
+/etc/cron.deny
+Note: If neither of these files exists then only the superuser(system administrator) 
+will be allowed to use a given command. 
+Sample commands: 
+
+Run /home/folder/gfg-code.sh every hour, from 9:00 AM to 6:00 PM, everyday.
+00 09-18 * * * /home/folder/gfg-code.sh
+Run /usr/local/bin/backup at 11:30 PM, every weekday.
+30 23 * * Mon, Tue, Wed, Thu, Fri /usr/local/bin/backup
+Run sample-command.sh at 07:30, 09:30, 13:30 and 15:30.
+30 07, 09, 13, 15 * * * sample-command.sh
+The following points should be remembered while working with cron: 
+
+Have a source version control to track and maintain the changes to the cron expressions.
+Organize the scheduled jobs based on their importance or the frequency and group them by 
+their action or the time range.
+Test the scheduled job by having a high frequency initially.
+Do not write complex code or several pipings and redirection in the cron expression 
+directly. Instead, write them to a script and schedule the script to the cron tab.
+Use aliases when the same set of commands are frequently repeated.
+Avoid running commands or scripts through cron as a root user.
