@@ -1,0 +1,131 @@
+Introduction to Linux Shell and Shell Scripting
+
+Using any modern operating system like Linux, macOS, or Windows involves interacting 
+with a shell, which interprets and executes user commands. In Linux, this interaction 
+typically happens through the terminal, where users type commands for the shell to process.
+
+Before learning shell scripting, you must understand:
+
+Kernel
+Shell
+Terminal
+Kernel
+The kernel is a computer program that is the core of a computer's operating system, 
+with complete control over everything in the system. It manages the following resources 
+of the Linux system:
+
+File management
+Process management
+I/O management
+Memory management
+Device management etc.
+Complete Linux system = Kernel + GNUsystem utilities and libraries + other management 
+scripts + installation scripts.
+
+Shell
+A shell is a special user program that provides an interface for the user to use operating 
+system services. Shell accepts human-readable commands from users and converts them into 
+something which the kernel can understand. It is a command language interpreter that 
+executes commands read from input devices such as keyboards or from files. The shell gets 
+started when the user logs in or starts the terminal.
+
+
+Industry best practices
+
+1)When to use .bashrc
+Aliases
+Functions
+PATH updates
+Dev shortcuts
+
+2)When NOT to
+Heavy scripts
+Long-running commands
+Secrets (tokens/passwords)
+
+Note:
+“Appending source <script> to .bashrc ensures the script is loaded for every interactive 
+shell. We use it for aliases and environment setup, but avoid heavy logic or secrets to 
+keep shell startup fast and secure.”
+
+# Shell is broadly classified into two categories –
+
+Command Line Shell
+Graphical shell
+
+# Simple demo of shell scripting using Bash Shell
+
+step 1) Create a script file
+nano demo.sh
+#!/bin/bash
+
+# Simple Bash Script Demo
+
+echo "Hello, World!"
+echo "Today is: $(date)"
+
+# Variable
+NAME="Yogesh"
+echo "My name is $NAME"
+
+# User input
+echo "Enter your favorite Linux command:"
+read CMD
+echo "You like: $CMD"
+
+# Conditional
+if [ "$CMD" = "docker" ]; then
+    echo "Great choice! Docker is awesome 🚀"
+else
+    echo "$CMD is also useful!"
+fi
+
+step 2) Make the script executable
+chmod +x demo.sh
+
+step 3)Run the script 
+./demo.sh
+ 
+step4)You must use .bashrc when you want persistence across sessions for:
+
+-Aliases
+ alias ll='ls -alF'
+
+-Environment variables
+  export JAVA_HOME=/usr/lib/jvm/java-17
+
+-Custom shell functions
+  mydeploy() {
+  docker ps
+}
+
+-Sourcing helper scripts
+  source ~/scripts/jump.sh
+
+  Note: Without .bashrc, these are lost when terminal closes.
+
+  .bashrc is executed every time you open a new interactive shell
+
+# What happens Actually:
+Makes your config session-persistent
+Not loaded automatically for:
+non-interactive shells
+cron
+Jenkins agents
+
+# To Make changes effective immediately
+source ~/.bashrc
+
+Note:.bashrc
+
+.bashrc" is a shell script that Bash shell runs whenever it is started interactively. 
+The purpose of a .bashrc file is to provide a place where you can set up variables, 
+functions, and aliases, define our prompt, and define other settings that we want to 
+use whenever we open a new terminal window.
+
+Now open the terminal and type the following command:
+
+$ echo “source ~/path/to/our/file/jump.sh”>> ~/.bashrc
+Now open your terminal and try out new "jump" functionality by typing following command-
+
+$ jump dir_name
