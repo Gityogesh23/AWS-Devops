@@ -1,0 +1,39 @@
+sample Dockerfile for -->maven web application as per pom.xml
+i.e as per application requirements.
+#To build an application we need environment as per applications configuration:
+#Dockerfile
+#BUILD----
+FROM maven:3.9-eclipse-temurin-8 AS build
+WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package
+
+#Runtime--
+#our java web app is javax servlet and it doesn't uses springBoot 3.x hence tomcat 9 will be okk
+#otherwise if SpringBoot 3.x framework is used to create an app then tomcat:10 for jakarta EE
+
+FROM tomcat:9.0-jre8-temurin
+RUN rm -rf /usr/local/tomcat/webapps/*
+COPY --from=build /app/target/maven-web-application.war
+                  /usr/local/tomcat/webapps/ROOT.war
+EXPOSE 8080
+CMD ["catalina.sh","run"]
+
+
+meaning of each line :
+1)FROM maven:3.9-eclipse-temurin-8 AS build
+In summary, this line sets up an environment with Maven version 3.9 and Java 8 
+(using the Eclipse Temurin distribution) to compile and package a Java application, 
+preparing it for the next stage of the Docker build process. 
+
+2)WORKDIR /app
+
+3)FROM tomcat:9.0-jre8-temurin
+tomcat -popular open source servlet container
+tomcat:9: The base image is Apache Tomcat version 9, which is a popular open-source servlet container.
+-jre8: It uses the Java Runtime Environment (JRE) version 8. This is the lightweight version of Java, containing only the runtime necessary to run applications, not the compiler.
+-temurin: The Java runtime is provided by Eclipse Temurin (formerly AdoptOpenJDK),
+ompatible Java Version: Tomcat 9 is designed to run on Java 8 or later.
+Structure: It sets up CATALINA_HOME at /usr/local/tomcat and configures the PATH to include the Temurin JRE binary.
+Usage: It is commonly used for deploying Java Servlets, JSP, and JSF applications that require a stable Tomcat 9 environment with Java 8. 
