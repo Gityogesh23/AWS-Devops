@@ -34,6 +34,6 @@ tomcat -popular open source servlet container
 tomcat:9: The base image is Apache Tomcat version 9, which is a popular open-source servlet container.
 -jre8: It uses the Java Runtime Environment (JRE) version 8. This is the lightweight version of Java, containing only the runtime necessary to run applications, not the compiler.
 -temurin: The Java runtime is provided by Eclipse Temurin (formerly AdoptOpenJDK),
-ompatible Java Version: Tomcat 9 is designed to run on Java 8 or later.
+Compatible Java Version: Tomcat 9 is designed to run on Java 8 or later.
 Structure: It sets up CATALINA_HOME at /usr/local/tomcat and configures the PATH to include the Temurin JRE binary.
 Usage: It is commonly used for deploying Java Servlets, JSP, and JSF applications that require a stable Tomcat 9 environment with Java 8. 
