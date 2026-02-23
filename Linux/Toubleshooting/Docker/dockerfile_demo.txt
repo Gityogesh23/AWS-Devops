@@ -37,3 +37,14 @@ tomcat:9: The base image is Apache Tomcat version 9, which is a popular open-sou
 Compatible Java Version: Tomcat 9 is designed to run on Java 8 or later.
 Structure: It sets up CATALINA_HOME at /usr/local/tomcat and configures the PATH to include the Temurin JRE binary.
 Usage: It is commonly used for deploying Java Servlets, JSP, and JSF applications that require a stable Tomcat 9 environment with Java 8. 
+
+4)RUN rm -rf /usr/local/tomcat/webapps/*
+clearing the artifact which is created inside /usr/local/tomcat/webapps/ ,every time as build started via 
+jenkins CI/CD pipeline.
+ So that memory will be consume less of an instance.
+
+5)COPY --from=build /app/target/maven-web-application.war
+                  /usr/local/tomcat/webapps/ROOT.war
+
+In this step we are taking an build .war from first stage where .war is created and 
+copy it inside location from where actual application is served by tomcat.
