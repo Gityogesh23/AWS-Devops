@@ -48,3 +48,51 @@ jenkins CI/CD pipeline.
 
 In this step we are taking an build .war from first stage where .war is created and 
 copy it inside location from where actual application is served by tomcat.
+
+#If you'r going to build and deploy python stearmlist app.
+#requirements for Dockerfile are?
+# What Information you should know is below?
+
+1)Python version?
+2)Do you have requirements.txt?
+3)Any ML libraries? (tensorflow / torch?)
+4)Does it use system packages? (like libgl1, ffmpeg)
+5)What is main file name? (app.py?)
+6)Does it need .env variables?
+7)Is it connecting to DB?
+
+#NOte:Its essential to add .dockerignore
+--------------------------------------------------------
+Dockerfile?
+
+# ---------- BUILD STAGE ----------
+FROM python:3.10-slim-bookworm as builder
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+
+RUN pip install --upgrade pip \
+    && pip install --no-cache-dir --prefix=/install -r requirements.txt
+
+
+# ---------- RUNTIME STAGE ----------
+FROM python:3.10-slim-bookworm
+
+WORKDIR /app
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+COPY --from=builder /install /usr/local
+
+COPY . .
+
+EXPOSE 8501
+
+CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
