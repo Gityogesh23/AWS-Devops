@@ -1,0 +1,3 @@
+Terraform is a iac tool which basically -used to provisioning,managing cloud
+infrastructure.
+
