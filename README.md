@@ -14,47 +14,37 @@ Here are the top 10 engineering blogs(Across Different Domains)that I Recommend 
 9)https://www.uber.com/en-IN/blog/engineering/  #Consistently Posted  
 10)https://netflixtechblog.com/empowering-netflix-engineers-with-incident-management-ebb967871de4  
 
-#  10 Open-Source GitHub -Should bookmark- few are forked in this account.(Covers DevOps, MLOps, AI Infra & Observability)
-# As devops Engineer: how AI systems run in production is quickly becoming a valuable skill.
-# These open-source projects sit at the intersection of DevOps, AI infrastructure, MLOps, and observability.
-# 10 GitHub repos worth exploring.
+## Recommended Open-Source Repositories
+**Focus: DevOps, MLOps, AI Infra & Observability**
 
-**GitOps / Platform Engineering**
-# 1) Argo CD ~ Declarative GitOps continuous delivery for Kubernetes
-  GitHub: https://lnkd.in/gmpvvi39
-→ Keeps cluster state synced with Git and automates deployments. 
-# 2)  KEDA ~ Event-driven autoscaling for Kubernetes workloads
-  GitHub: https://lnkd.in/d5C5ie8V   
-→ Scale pods based on queue length, metrics, or external events.
+As a DevOps Engineer, understanding how AI systems run in production is quickly becoming a vital skill. These 10 open-source projects sit at the intersection of infrastructure, model serving, and automation.
 
-**MLOps Platforms**
-# 1) Kubeflow ~ End-to-end ML platform for Kubernetes
-  GitHub: https://lnkd.in/gy8Ap_bz
-→ Covers pipelines, training operators, and model serving
+---
 
-# 2) MLflow ~ ML lifecycle management
-GitHub: https://lnkd.in/gDmUmdk2
-→ Experiment tracking, model registry, and deployment workflows.
+### 1. GitOps & Platform Engineering
+* **Argo CD** * [GitHub Link](https://github.com/argoproj/argo-cd)  
+    * *Significance:* Declarative GitOps continuous delivery for Kubernetes. It keeps cluster state synced with Git and automates deployments.
+* **KEDA** * [GitHub Link](https://github.com/kedacore/keda)  
+    * *Significance:* Event-driven autoscaling for Kubernetes. Scale pods based on queue length, metrics, or external events.
 
-**Observability for AI Systems**
-# 1) Prometheus ~ Metrics and alerting for distributed systems
-GitHub: https://lnkd.in/g2EqVvnQ
-# 2) Grafana ~ Dashboards for metrics, logs, and traces
-GitHub: https://lnkd.in/gNwg-Tzg
-# 3) OpenTelemetry ~ Unified telemetry for logs, metrics, and traces
-GitHub: https://lnkd.in/gC7Rn3WM
+### 2. MLOps Platforms
+* **Kubeflow** * [GitHub Link](https://github.com/kubeflow/kubeflow)  
+    * *Significance:* End-to-end ML platform for Kubernetes. Covers pipelines, training operators, and model serving.
+* **MLflow** * [GitHub Link](https://github.com/mlflow/mlflow)  
+    * *Significance:* ML lifecycle management including experiment tracking, model registry, and deployment workflows.
 
-**AI / LLM Inference Infrastructure**
-# 1)  vLLM ~ LLM inference engine
-GitHub: https://lnkd.in/gASnrg9F
-# 2) NVIDIA Triton (Dynamo-Triton) ~ Production model serving platform
-GitHub: https://lnkd.in/guBU7w-Z
-→ Deploy models across multiple frameworks with optimized inference. 
-# 3)  NVIDIA Dynamo ~ Distributed inference engine for LLM workloads
-GitHub: https://lnkd.in/gQ2cpe9m
-# Note:
- -The future DevOps stack isn’t just:
-**Docker → Kubernetes → CI/CD.**
+### 3. Observability for AI Systems
+* **Prometheus:** Metrics and alerting for distributed systems. [GitHub](https://github.com/prometheus/prometheus)
+* **Grafana:** Dashboards for metrics, logs, and traces. [GitHub](https://github.com/grafana/grafana)
+* **OpenTelemetry:** Unified telemetry for logs, metrics, and traces. [GitHub](https://github.com/open-telemetry/opentelemetry-specification)
 
-**It’s becoming:**
-# AI workloads → model serving → GPU scheduling → AI observability → AI autoscaling.
+### 4. AI / LLM Inference Infrastructure
+* **vLLM:** High-throughput LLM inference engine. [GitHub](https://github.com/vllm-project/vllm)
+* **NVIDIA Triton:** Production model serving platform. Deploy models across multiple frameworks. [GitHub](https://github.com/triton-inference-server/server)
+* **NVIDIA Dynamo:** Distributed inference engine for LLM workloads. [GitHub](https://github.com/NVIDIA/TensorRT-LLM)
+
+---
+
+> **Note on the Evolving DevOps Stack:**
+> The future DevOps stack is expanding beyond **Docker → Kubernetes → CI/CD.** > It is moving toward:
+> **AI workloads → Model serving → GPU scheduling → AI observability → AI autoscaling.**
