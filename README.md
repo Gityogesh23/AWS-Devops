@@ -48,3 +48,4 @@ As a DevOps Engineer, understanding how AI systems run in production is quickly 
 > **Note on the Evolving DevOps Stack:**
 > The future DevOps stack is expanding beyond **Docker → Kubernetes → CI/CD.** > It is moving toward:
 > **AI workloads → Model serving → GPU scheduling → AI observability → AI autoscaling.**
+![10 AI GitHub Repos for Devops Engineers](images/repo's_to_follow.png)
