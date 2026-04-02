@@ -1,6 +1,0 @@
-Terraform is a iac tool which basically -used to provisioning,managing cloud
-infrastructure.
-
-
-Terraform has terraform state file,variab;es and so on .
-The most demanding skill in devops now is terraform only.
