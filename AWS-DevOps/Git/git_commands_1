@@ -1,0 +1,33 @@
+# 10 Git commands Devops Engineer Should Know.
+If you've worked with Git long enough, you've probably hit some common frustrations like 
+operations getting slower as repositories grow, accidentally overwriting changes when 
+switching branches, or struggling with massive monorepos.
+
+Thankfully, just like every other tool, Git is constantly evolving and adding new 
+features to make our lives easier. While some of these commands aren't particularly 
+recent, they remain lesser-known gems that can significantly improve your workflow. 
+If you're already familiar with some of the core tips and tricks—like those covered in 15 
+Git command line tips every developer should know, this article will introduce you to ten 
+additional commands that can take your Git skills to the next level.
+
+1. git switch - A safer way to change branches
+
+Before Git 2.23, git checkout was the main command for switching branches, but it did much
+more than that. You could use it to restore files, create branches, or check out specific 
+commits. This made it powerful but potentially confusing - especially when you just
+wanted to switch branches without touching your files.
+
+That's why Git 2.23 introduced git switch as a more focused alternative for branch 
+operations. With git switch, you can focus solely on branch management:
+
+# Move to another branch
+git switch feature-branch
+
+# Create and switch to a new branch
+git switch -c new-branch
+
+This clarity reduces the risk of accidentally overwriting files or making unintended 
+changes. 
+If you've ever hesitated to use git checkout for fear of doing something wrong, 
+git switch simplifies the process.
+
