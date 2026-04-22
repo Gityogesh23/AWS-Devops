@@ -30,4 +30,19 @@ This clarity reduces the risk of accidentally overwriting files or making uninte
 changes. 
 If you've ever hesitated to use git checkout for fear of doing something wrong, 
 git switch simplifies the process.
+--------------------------------------------------------------------------------
 
+2. git restore - Safely undo changes
+
+Undoing changes often involved using git checkout to revert files or git reset to move the branch HEAD. However, both commands had the potential to alter your branch state if used incorrectly: git reset could move your branch HEAD, while git checkout could switch branches or check out a different commit, disrupting the current branch.
+
+Git 2.23 introduced git restore to focus solely on undoing changes to files. It provides a safer and more straightforward way to revert changes in your working directory or staging area, clearly separating file operations from branch management tasks:
+
+Git commands:
+# Discard working directory changes
+git restore main.js
+
+# Unstage changes from the index
+git restore --staged main.js
+
+This is especially useful for beginners or in high-stakes situations where precision matters. You can undo changes without worrying about accidentally switching branches or resetting commits.
