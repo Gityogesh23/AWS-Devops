@@ -47,4 +47,5 @@ git restore --staged main.js
 
 This is especially useful for beginners or in high-stakes situations where precision matters. You can undo changes without worrying about accidentally switching branches or resetting commits.
 --------------------------------------------------------------------------------------
-3. git command today
+3. git command today.
+Third and most imp command which is git merge .
