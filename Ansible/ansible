@@ -1,0 +1,41 @@
+ # Def: Ansible: ansible is a agentless configuration management tool that automates server setup and application deployment using YAML-based playbook.
+
+Ansible is a tool used to automate :
+1)Server Setup
+2)Application Deployment.
+3)Configuration Management
+4)Orchestration
+
+# Why it's Popular: 
+B'z it's Agentless: No software needed on  target server.
+Uses SSH(Linux).
+
+# Simple YAML based:
+- name:install nginx
+  hosts: web
+  tasks:
+   -name: Install nginx
+    apt:
+    name:ngix
+    state: present
+
+# idempotent 
+if already install - won't reinstall.
+-Ensures consistency
+
+# How Ansible Works:
+Components:
+1) Control Node
+Where ansible installed.
+2) Managed Nodes
+Your Servers(Ec2,VM's)
+3) Invetnory Files
+List of servers.
+
+# What you can do with Ansible
+Server setup
+Install packages
+Create users
+Configure firewall
+
+
