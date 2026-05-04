@@ -1,10 +1,10 @@
  # Def: Ansible: ansible is a agentless configuration management tool that automates server setup and application deployment using YAML-based playbook.
 
 Ansible is a tool used to automate :
-1)Server Setup
-2)Application Deployment.
-3)Configuration Management
-4)Orchestration
+1) Server Setup
+2) Application Deployment.
+3) Configuration Management
+4) Orchestration
 
 # Why it's Popular: 
 B'z it's Agentless: No software needed on  target server.
@@ -39,3 +39,20 @@ Create users
 Configure firewall
 
 
+# How it works ?
+1) You define your infrastructure in an inventory.
+2) You write a playbook describing desired state.
+3) Ansible connects via SSH and executes tasks.
+4) Systems are configure to match the desired state.
+
+# Ansible vs Other tools:
+ 1) vs puppet /chef--> simple,No agents required.
+ 2) vs terraform --> Ansible configures systems, Terraform provisions infrastructure.
+
+ # Common Use Cases:
+ 1) Setting up web servers (NGINX,Apache)
+ 2) Deploying docker containers.
+ 3) Managing cloud resources(AWS,Azure)
+ 4) Continuous Delivery Pipeline.
+
+ 
