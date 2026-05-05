@@ -1,0 +1,61 @@
+Title: Architecting Intelligent Microservices: Bridging the Gap Between AI and DevOps.
+
+In DevOps, we often climb a linear ladder: master Docker, then tackle Kubernetes and eventually — perhaps — touch production-grade tooling. For a long time, I studied these in isolation, but a persistent gap remained between spinning up a container and managing a resilient, real-world system. I understood Terraform, but hadn’t yet embraced the power of modularity, I viewed ArgoCD and the Prometheus-Grafana stack as ‘end-game’ technologies reserved for the experts.
+
+That perspective shifted when I stopped seeing these tools as isolated steps and started seeing them as a unified ecosystem. I want to give a huge shout-out to Vishakha Sadhwani, for her DevOps + AIOps Project Series. Inspired by the series, I realized that true engineering happens at the intersection of these layers. This article documents the journey of bridging those gaps — moving beyond basic containerization to build a full-scale, automated and AI-enabled microservices environment.
+
+See img:link below:
+https://miro.medium.com/v2/resize:fit:1100/format:webp/1*yddhbgIJNWS-dC2Koi0fNw.png
+
+Architecture -->
+Blueprint Before the Build
+Before a single line of code gets deployed, there’s a mental model you need to hold — a system where every layer exists for a reason and feeds into the next. At the foundation sits a React + Node.js + PostgreSQL application, split into 7 microservices.
+These aren’t monolith pieces carelessly sliced apart, each service owns its domain, communicates over well-defined boundaries, and can fail independently without dragging the rest down. That separation is intentional — it’s the foundation everything else is built on.
+From Code to Cloud, Without Touching a Server
+The moment code is pushed to GitHub, the system wakes up. GitHub Actions picks it up, validates it, builds Docker images and pushes them to the registry — all without a single manual step. But what makes this architecture interesting isn’t just the automation, it’s what decides what gets deployed. That’s ArgoCD.
+With GitOps, the cluster doesn’t wait for instructions — it continuously watches the Git repository, and if the desired state in Git doesn’t match what’s running in the cluster, it self-corrects. Instead of a pipeline pushing changes into the cluster, the cluster itself pulls the desired state from Git
+The infrastructure is managed by Terraform, the cluster runs on AWS EKS handles environment-specific config layering. Infrastructure stops being something you touch — it becomes something you declare.
+Observability as a First-Class Citizen
+A system you can’t see is a system you can’t trust. Three questions every engineer in production should always be able to answer: Is the system up? How fast is it responding? And how will you know when something breaks?
+Prometheus scrapes metrics from every running service, Grafana turns those numbers into dashboards you can actually read and AWS Fluent Bit forwards logs straight into CloudWatch — each one answering a piece of that question.
+This isn’t bolted on at the end, it’s wired into the architecture from day one. Because in production, the question isn’t if something breaks — it’s how fast you know.
+The Intelligence Layer: Where AIOps Changes the Game
+This is where the architecture steps beyond standard DevOps. Sitting above the observability stack is Kira — an AWS Bedrock Agent trained to do what humans are slow at: correlate signals across logs, metrics and traces at scale, and surface what actually matters.
+Instead of an engineer wading through Grafana alerts at midnight, Kira can analyze anomalies, identify likely root causes and suggest remediation steps. The shift is subtle but profound — the system doesn’t just report what’s wrong anymore, it starts reasoning about it. That’s the AIOps layer, and it’s what turns a well-built pipeline into a genuinely intelligent platform.
+WorkFlow
+Every system that looks elegant from the outside is a series of deliberate decisions made on the inside. This one has six workflows — each one a layer that the previous one made possible.
+
+# see img:link address below:
+https://miro.medium.com/v2/resize:fit:1100/format:webp/1*jRUgKuXa5lHoXWVaFciTAg.png
+
+Before any pipeline, any cluster, any CI/CD — there’s an architectural decision that either sets you up or haunts you: how do you structure the application?
+
+
+The answer here was microservices — not because it’s trendy, but because it forces discipline. The Boutique app is an e-commerce web store, and if you’ve seen the UI, it looks deceptively simple: browse products, add to cart, place an order. But underneath that clean interface, 5 backend services are running independently — Auth, Product, Orders, Order Management and User — each living on its own port (3002–3006), owning its own logic, and talking to nothing it doesn’t need to.
+
+A React frontend on port 3000 never speaks to a service directly. Every request flows through an API Gateway on port 3001, which acts as the single front door — routing, controlling, and shielding the services behind it. Nginx sits in front as the reverse proxy, handling what the public internet sees before anything reaches application code.
+
+What makes this more than just a “split-up app” is the database strategy. A single PostgreSQL instance runs at port 5432, but it’s not one shared blob of data — it’s logically separated into distinct databases per domain: auth_db, products_db, and so on. Each service only touches its own slice. This matters enormously later when you're isolating failures, debugging in production, or deciding which service to scale. The architecture here wasn't accidental — it was the prerequisite for everything that followed.
+
+Workflow 1 — Local Dev with Docker Compose
+see img:link below -->
+https://miro.medium.com/v2/resize:fit:1100/format:webp/1*r4dg8mZK3T-BhVbBxsOIlA.png
+
+
+There’s a moment every developer knows — the app runs perfectly on their machine and immediately breaks on someone else’s. Docker Compose is the answer to that moment.
+
+With a single docker-compose up --build, the entire system — frontend, API Gateway, all five services, PostgreSQL, Prometheus and Grafana — spins up on a shared Docker internal network. Every container can reach every other container by name, not by IP. No manual port configuration, no "did you install the right version of Node?" — the environment is the same for everyone, every time.
+
+PostgreSQL pulls a public image and initializes four logical databases on first boot. Prometheus and Grafana aren't an afterthought bolted on for production — they're running at ports 9090 and 3007 from day one locally, which means observability is something you develop with, not something you scramble to add later.
+
+What’s worth pausing on here is what Docker Compose actually taught about the system. Running everything together locally exposed communication patterns between services, revealed which services were stateful, and made it clear how Nginx needed to be configured before a single Kubernetes manifest was written. Local environment wasn’t just a convenience — it was a rehearsal.
+
+Workflow 2 — Cloud Infrastructure with Terraform
+
+link below: 
+https://miro.medium.com/v2/resize:fit:1100/format:webp/1*aq7dAQwN7_tJ6JLU_GxmwQ.png
+
+Most people interact with AWS through the console. It works, until you need to recreate it, explain it to a teammate or tear it down and rebuild without missing a step. Terraform makes the cloud auditable.
+
+The entire AWS infrastructure was provisioned through three Terraform modules, applied with a single terraform apply. The Networking module handled the VPC, subnets across 3 availability zones the Internet Gateway and route tables — the invisible plumbing that makes the cluster reachable. The EKS module provisioned the cluster itself: nodes, IAM roles and OIDC configuration for secure pod-level identity.
+
