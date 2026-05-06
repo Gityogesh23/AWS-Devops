@@ -59,3 +59,5 @@ Most people interact with AWS through the console. It works, until you need to r
 
 The entire AWS infrastructure was provisioned through three Terraform modules, applied with a single terraform apply. The Networking module handled the VPC, subnets across 3 availability zones the Internet Gateway and route tables — the invisible plumbing that makes the cluster reachable. The EKS module provisioned the cluster itself: nodes, IAM roles and OIDC configuration for secure pod-level identity.
 
+#must learn about TimescaleDb: 
+Tiger Cloud is a fully-managed TimescaleDB solution, hosted on AWS and designed for high-ingest, high-read time series workloads that are commonly seen in IoT, Manufacturing, Oil & Gas, Utilities, Financial Services and Crypto use cases. Tiger Cloud /TimescaleDB extends vanilla PostgreSQL so you can run analytics directly on live operational data and continue scaling, while avoiding fragmented architecture with a separate analytics database.
